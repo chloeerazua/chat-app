@@ -17,7 +17,15 @@ const Chat = ({ location }) => {
         setName(name);
         setRoom(room);
 
-        socket.emit('join', {name: name, room: room}, () );
+        socket.emit('join', {name: name, room: room}, () => {
+
+        } );
+
+        return () => {
+            socket.emit('User has disconnected');
+
+            socket.off();
+        }
     }, [endpoint, location.search]);
 
     return (
